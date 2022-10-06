@@ -9,11 +9,10 @@ import org.springframework.stereotype.Component;
 @Aspect
 @EnableAspectJAutoProxy
 public class FoodOrderingAspect {
-	
-	@Before("execution(public Customer getOneCustomer(..))")
+
+	@Before("execution(* com.food.ordering.controller.*.getOneCustomer(..))")
 	public void getOneCustomerAdvice()
 	{
-		System.out.println("GetOneCustomerAdvice executed");
+		System.out.println("get customer details");
 	}
-
 }

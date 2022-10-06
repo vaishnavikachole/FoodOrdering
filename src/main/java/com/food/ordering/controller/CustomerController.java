@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.food.ordering.entities.Customer;
 import com.food.ordering.service.CustomerService;
 
+
 @RestController
 @RequestMapping("/rest/food")
 public class CustomerController 
@@ -49,6 +50,7 @@ public class CustomerController
 		
 	}
 	
+
 	@GetMapping("/one/{customerId}")
 	public ResponseEntity<?> getOneCustomer(@PathVariable Integer customerId)
 	{

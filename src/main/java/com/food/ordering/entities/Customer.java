@@ -1,5 +1,8 @@
 package com.food.ordering.entities;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,19 +39,22 @@ public class Customer
 	@Column(name="mobile_number",length=60,nullable=false)
 	private long customerMobile;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="customer_address_fk")
-	private Address address;
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="customer")
+	private List<Address> address;
 	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="customer")
+	private Set<Order> order;
+	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="add_to_cart_id")
+	private AddToCart addToCart;
 	
 	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-
+	
 	public Customer(int customerId, String customerName, String customerEmail, String password, long customerMobile,
-			Address address) {
+			List<Address> address, Set<Order> order, AddToCart addToCart) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -55,8 +62,9 @@ public class Customer
 		this.password = password;
 		this.customerMobile = customerMobile;
 		this.address = address;
+		this.order = order;
+		this.addToCart = addToCart;
 	}
-
 
 	public int getCustomerId() {
 		return customerId;
@@ -97,28 +105,42 @@ public class Customer
 	{
 		this.customerMobile = customerMobile;
 	}
-
-	public Address getAddress() {
+	
+	public List<Address> getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 
+
+	public Set<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(Set<Order> order) {
+		this.order = order;
+	}
+	
+
+	public AddToCart getAddToCart() {
+		return addToCart;
+	}
+
+	public void setAddToCart(AddToCart addToCart) {
+		this.addToCart = addToCart;
+	}
 
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerEmail="
 				+ customerEmail + ", password=" + password + ", customerMobile=" + customerMobile + ", address="
-				+ address + "]";
+				+ address + ", order=" + order + ", addToCart=" + addToCart + "]";
 	}
-	
+
 	
 
 	
-	
-	
-
-
 }
