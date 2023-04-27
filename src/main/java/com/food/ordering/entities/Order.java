@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,9 +48,9 @@ public class Order
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="order")
 	private Set<OrderDetails> orderDetails;
 	
-//	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-//	@JoinColumn(name="order_payment")
-//	private Payment payment;
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="order_payment")
+	private Payment payment;
 
 	public Order() {
 		super();
